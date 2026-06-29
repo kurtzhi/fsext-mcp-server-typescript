@@ -1,0 +1,55 @@
+# NOTICE
+## FsExt MCP Server
+Copyright © 2026 kurtzhi (https://github.com/kurtzhi/fsext-mcp-server-typescript)
+Licensed under the Apache License 2.0.
+
+This software incorporates third-party open source runtime dependencies required for end-user production execution, each distributed under their respective open source licenses as set forth below:
+
+1. fastmcp (Apache-2.0 License)
+Provides core Model Context Protocol (MCP) server and client implementation, enabling remote procedure call orchestration for cross-process file system service operations.
+Supported version range: >=3.30.0 <5.0.0
+
+2. chardet (GNU Lesser General Public License v2.1 or later (LGPLv2+))
+Performs automatic statistical detection of text file character encoding signatures for plaintext asset parsing.
+Supported version range: >=2.0.0 <2.3.0
+
+3. cors (MIT License)
+Implements cross-origin resource sharing header middleware for HTTP transport entrypoint access control.
+Supported version range: ^2.8.6
+
+4. iconv-lite (MIT License)
+Lightweight pure-JavaScript character set transcoding utility for bidirectional text encoding conversion.
+Supported version range: >=0.6.3 <=0.7.2
+
+5. minimist (MIT License)
+Command-line argument parser for server startup configuration and runtime flag resolution.
+Supported version range: >=0.2.4 <2.0.0
+
+6. sharp (Apache-2.0 License)
+High-performance native image processing library offering asset decoding, resizing, rotation, cropping and pixel manipulation pipelines.
+Supported version range: >=0.32.6 <0.36.0
+
+7. tesseract.js (Apache-2.0 License)
+JavaScript bindings for the Tesseract OCR engine, enabling optical character recognition from raster image files.
+Supported version range: >=5.1.1 <8.0.0
+
+8. winston (MIT License)
+Structured asynchronous logging framework for standardized runtime event, error and audit log persistence.
+Supported version range: >=3.17.0 <=3.19.0
+
+9. zod (MIT License)
+Strict schema validation and static type inference library enforcing type safety for all service request/response payload models.
+Supported version range: >=3.25.76 <5.0.0
+
+---
+
+## Development-Exclusive Dependencies
+The following packages are only required for local source code building, static type checking and automated integration testing workflows. They are not bundled, distributed or executed as part of end-user runtime deployments:
+No fixed inventory listed herein; complete development dependency manifests are maintained within the project `package.json`.
+
+---
+
+## Supplementary License Information
+Complete legal documentation including precise supported version bounds, original copyright statements, upstream repository source URLs, full verbatim license text and attribution notices for all listed third-party components are consolidated within the `THIRD_PARTY_LICENSES` file distributed alongside this software distribution.
+
+All use, reproduction, modification and redistribution of this software and its embedded third-party components are subject to the terms and conditions of their respective governing open source licenses.

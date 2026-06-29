@@ -1,0 +1,17 @@
+jest/vitest/mocha
+.vscode/
+.idea/
+.git
+.env
+.env.local
+.gitignore
+node_modules
+coverage
+src/
+tests/
+tsconfig*.json
+*.config.js
+*.iml
+node_modules
+dist/tests/
+package-lock.json

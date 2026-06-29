@@ -1,0 +1,89 @@
+{
+  "name": "fsext-mcp-server",
+  "version": "0.1.0",
+  "description": "Extended filesystem MCP toolkit with file I/O, directory operations, image processing and OCR. Supports stdio, SSE and streamable-http transports.",
+  "keywords": [
+    "MCP server tool",
+    "filesystem mcp server",
+    "file read",
+    "file write",
+    "file search",
+    "file replace",
+    "image resize",
+    "image crop",
+    "image rotate",
+    "image OCR",
+    "MCP SSE",
+    "MCP stdio",
+    "MCP streamable-http"
+  ],
+  "author": {
+    "name": "Kurt Zhi",
+    "email": "constantine.johns@gmail.com"
+  },
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/kurtzhi/fsext-mcp-server-typescript#readme",
+  "bugs": {
+    "url": "https://github.com/kurtzhi/fsext-mcp-server-typescript/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kurtzhi/fsext-mcp-server-typescript.git"
+  },
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "fsext": "dist/server.js",
+    "fsext-ts": "dist/server.js",
+    "fsext-mcp-server": "dist/server.js",
+    "fsext-mcp-server-ts": "dist/server.js"
+  },
+  "files": [
+    "dist",
+    "!dist/tests/**"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsc",
+    "dev": "tsc -w",
+    "rebuild": "npm run clean && npm run build",
+    "server": "npm run rebuild && node dist/server.js",
+    "fastmcp": "npm run rebuild && npx fastmcp dev dist/server.js",
+    "inspect": "npm run rebuild && npx @modelcontextprotocol/inspector node dist/server.js",
+    "build:test": "npm run clean && tsc -p tsconfig.test.json",
+    "test": "npm run build:test && node dist/tests/service.test.js",
+    "test:v0": "npm run build:test && node dist/tests/main.js"
+  },
+  "allowScripts": {
+    "tesseract.js": true,
+    "tldjs": true,
+    "unrs-resolver": true
+  },
+  "overrides": {
+    "glob": "^12.0.0",
+    "inflight": "npm:lru-cache@^11.2.0",
+    "koa-router": "npm:@koa/router@^15.0.0"
+  },
+  "engines": {
+    "node": ">=22.0.0 <27.0.0"
+  },
+  "dependencies": {
+    "chardet": ">=2.0.0 <2.3.0",
+    "cors": "^2.8.6",
+    "fastmcp": ">=3.30.0 <5.0.0",
+    "iconv-lite": ">=0.6.3 <= 0.7.2",
+    "minimist": ">=0.2.4 <2.0.0",
+    "sharp": ">=0.33.5 <0.36.0",
+    "tesseract.js": ">=5.1.1 <8.0.0",
+    "winston": ">=3.17.0 <=3.19.0",
+    "zod": ">=3.25.76 <5.0.0"
+  },
+  "devDependencies": {
+    "@types/minimist": "^1.2.5",
+    "@types/node": ">=22.0.0 <25.0.0",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
