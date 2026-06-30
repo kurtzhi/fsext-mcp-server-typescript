@@ -1,6 +1,6 @@
 {
   "name": "fsext-mcp-server",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Extended filesystem MCP toolkit with file I/O, directory operations, image processing and OCR. Supports stdio, SSE and streamable-http transports.",
   "keywords": [
     "MCP server tool",
@@ -56,9 +56,10 @@
     "test:v0": "npm run build:test && node dist/tests/main.js"
   },
   "allowScripts": {
+    "opencollective-postinstall": true,
+    "unrs-resolver": true,
     "tesseract.js": true,
-    "tldjs": true,
-    "unrs-resolver": true
+    "tldjs": true
   },
   "overrides": {
     "glob": "^12.0.0",

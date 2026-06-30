@@ -26,7 +26,8 @@
  * A global lock root directory controls permission scope; empty lock mode disables all path restrictions.
  */
 
-import {resolve} from "path";
+import {existsSync, realpathSync} from "fs";
+import { resolve, relative, sep } from 'path';
 
 import winston from "winston";
 
@@ -63,7 +64,17 @@ export function cleanPath(rawPath: string): string {
     while (unixStyle.includes("//")) {
         unixStyle = unixStyle.replace("//", "/");
     }
-    return unixStyle;
+
+    const resolved = resolve(unixStyle);
+    let path = resolved;
+    if (existsSync(resolved)) {
+        try {
+            path = realpathSync(resolved);
+        } catch (e) {
+            path = resolved;
+        }
+    }
+    return process.platform === 'win32' ? path.toLowerCase() : path;
 }
 
 /**
@@ -79,10 +90,11 @@ export function folderLockCheck(lockRoot: string, targetPath: string): boolean {
     requireWritableDirectory(lockRootAbs, "lock_root");
     requireNonBlank(targetPath, "target_path");
 
-    const rootReal = resolve(lockRootAbs);
-    const targetReal = resolve(targetPath);
-    const rootWithSep = rootReal + "/";
-    return targetReal === rootReal || targetReal.startsWith(rootWithSep);
+    const rootReal = cleanPath(lockRootAbs);
+    const targetReal = cleanPath(targetPath);
+
+    const relativePath = relative(rootReal, targetReal);
+    return relativePath === '' || !relativePath.startsWith('..' + sep) && relativePath !== '..';
 }
 
 /**
@@ -100,21 +112,12 @@ export function restrictWorkspace<F extends (args: Record<string, any>) => Promi
                 return fn(args);
             }
 
-            const lockAbs = resolve(lockRoot);
-            const safeLock = cleanPath(lockAbs);
-            const safeLockDir = safeLock.endsWith("/") ? safeLock : `${safeLock}/`;
-
             for (const field of pathKeys) {
                 const rawPath = args[field];
                 if (!rawPath) continue;
 
-                const targetAbs = resolve(rawPath);
-                const safeTarget = cleanPath(targetAbs);
-
-                // Allow exact workspace root OR any sub item under root
-                const isExactRoot = safeTarget === safeLock;
-                const isChildPath = safeTarget.startsWith(safeLockDir);
-                if (!isExactRoot && !isChildPath) {
+                const isSafe = folderLockCheck(lockRoot, rawPath)
+                if (!isSafe) {
                     const msg = `Access restricted: Path \`${rawPath}\` is outside allowed workspace \`${lockRoot}\``;
                     console.warn(`Block cross workspace access: ${msg}`);
                     throw new WorkspaceEscapeError(msg);

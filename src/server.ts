@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // SPDX-FileCopyrightText: 2026 https://github.com/kurtzhi/fsext-mcp-server-typescript
 // SPDX-License-Identifier: Apache-2.0
 
