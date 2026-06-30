@@ -50,9 +50,11 @@ npm install fsext-mcp-server
 
 ```bash
 # Default stdio transport for local agent integration
+fsext-mcp-server-ts
 fsext-mcp-server
 
 # Short alias
+fsext-ts
 fsext
 ```
 
